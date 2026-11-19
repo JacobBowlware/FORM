@@ -1,11 +1,12 @@
-import React, { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { FormEvent, useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Exercise from '../Components/Exercise';
 import { WorkoutExerciseDraft } from '../Models/WorkoutExerciseDraft';
 import {
   getMostRecentExercise,
   saveWorkout
 } from '../Services/workoutService';
+import {getWorkoutById} from '../Services/workoutService';
 
 const exerciseCatalog: Record<string, string[]> = {
   Chest: ['Bench press', 'Incline dumbbell press', 'Chest fly', 'Push-up'],
@@ -29,6 +30,34 @@ const Workout = () => {
   const [customName, setCustomName] = useState('');
   const [exercises, setExercises] = useState<WorkoutExerciseDraft[]>([]);
   const [error, setError] = useState('');
+
+  // If present, this is the ID of the workout to load.
+  const { itemId: workoutId } = useParams<{ itemId: string }>();
+
+  // Load the workout if an ID is present in the URL
+  useEffect(() => {
+    const LoadWorkout = async () => {
+      if (workoutId) {
+        await getWorkoutById(workoutId).then((workout) => {
+            if (workout) {
+              setWorkoutName(workout.name);
+              setBodyWeight(workout.bodyWeight?.toString() ?? '');
+              setNotes(workout.notes);
+              setExercises(
+                workout.exercises.map((exercise) => ({
+                  ...exercise,
+                  previousSets: exercise.sets,
+                }))
+              );
+            }
+          });
+      }
+    }
+
+    if (workoutId) {
+      LoadWorkout();
+    }
+  }, [workoutId]);
 
   const addExercise = async (name: string) => {
     const trimmedName = name.trim();

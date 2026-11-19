@@ -8,6 +8,11 @@ export const getWorkouts = async (): Promise<WorkoutRecord[]> => {
   return savedWorkouts ? (JSON.parse(savedWorkouts) as WorkoutRecord[]) : [];
 };
 
+export const getWorkoutById = async (id: string): Promise<WorkoutRecord | undefined> => {
+  const workouts = await getWorkouts();
+  return workouts.find((workout) => workout.id === id);
+}
+
 export const saveWorkout = async (workout: WorkoutRecord): Promise<WorkoutRecord> => {
   const workouts = await getWorkouts();
   localStorage.setItem(WORKOUTS_STORAGE_KEY, JSON.stringify([workout, ...workouts]));
