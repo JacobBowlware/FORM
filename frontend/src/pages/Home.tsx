@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getWorkouts } from '../Services/workoutService';
-import { WorkoutRecord } from '../Models/WorkoutRecord';
-import '../Styles/Home.css';
+import { getWorkouts } from '../services/WorkoutService';
+import { WorkoutRecord } from '../models/WorkoutRecord';
+import '../styles/Home.css';
 
 const formatDate = (date: Date) =>
   date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });

@@ -1,12 +1,12 @@
 import React, { FormEvent, useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Exercise from '../Components/Exercise';
-import { WorkoutExerciseDraft } from '../Models/WorkoutExerciseDraft';
+import Exercise from '../components/Exercise';
+import { WorkoutExerciseDraft } from '../models/WorkoutExerciseDraft';
 import {
   getMostRecentExercise,
   saveWorkout
-} from '../Services/workoutService';
-import {getWorkoutById} from '../Services/workoutService';
+} from '../services/WorkoutService';
+import {getWorkoutById} from '../services/WorkoutService';
 
 const exerciseCatalog: Record<string, string[]> = {
   Chest: ['Bench press', 'Incline dumbbell press', 'Chest fly', 'Push-up'],

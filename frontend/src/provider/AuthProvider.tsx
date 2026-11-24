@@ -5,7 +5,8 @@ import {
     useEffect,
     useState
 } from "react";
-import type { User } from "../Models/User";
+import type { User } from "../models/User";
+import {refreshUserToken} from "../services/AuthService";
 
 
 interface RefreshResponse {
@@ -43,12 +44,13 @@ export const AuthProvider = ({children} : {children: React.ReactNode}) => {
             
             // TODO: Implement conditional logic here so we don't refresh token if we already have one?
             try {
-                const response = await axios.post<RefreshResponse>('/auth/refresh', null, {
-                    withCredentials: true
-                });
+                console.log("attempting to restore user session from refresh cookie...");
+                const response = await refreshUserToken();
                 setToken(response.data.accessToken);
                 setUser(response.data.user);
                 setStatus('authenticated');
+
+                console.log('Session restored successfully:', response.data);
             }
             catch {
                 setToken(null);

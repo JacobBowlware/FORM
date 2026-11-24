@@ -1,6 +1,6 @@
 import React from 'react';
 import ExerciseSet from './ExerciseSet';
-import { WorkoutExerciseDraft } from '../Models/WorkoutExerciseDraft';
+import { WorkoutExerciseDraft } from '../models/WorkoutExerciseDraft';
 
 interface ExerciseProps {
   exercise: WorkoutExerciseDraft;

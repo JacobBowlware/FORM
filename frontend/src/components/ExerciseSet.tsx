@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExerciseSetDraft } from '../Models/ExerciseSetDraft';
+import { ExerciseSetDraft } from '../models/ExerciseSetDraft';
 
 interface ExerciseSetProps {
   set: ExerciseSetDraft;

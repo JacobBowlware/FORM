@@ -1,5 +1,7 @@
-import { WorkoutExercise } from '../Models/WorkoutExercise';
-import { WorkoutRecord } from '../Models/WorkoutRecord';
+import axios from 'axios';
+
+import { WorkoutExercise } from '../models/WorkoutExercise';
+import { WorkoutRecord } from '../models/WorkoutRecord';
 
 const WORKOUTS_STORAGE_KEY = 'fitness-tracker-workouts';
 
